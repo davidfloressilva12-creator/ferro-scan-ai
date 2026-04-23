@@ -14,6 +14,8 @@ import { Route as ScanRouteImport } from './routes/scan'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductNewRouteImport } from './routes/product.new'
+import { Route as ProductIdRouteImport } from './routes/product.$id'
 
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
@@ -40,6 +42,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductNewRoute = ProductNewRouteImport.update({
+  id: '/product/new',
+  path: '/product/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductIdRoute = ProductIdRouteImport.update({
+  id: '/product/$id',
+  path: '/product/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +59,8 @@ export interface FileRoutesByFullPath {
   '/profile': typeof ProfileRoute
   '/scan': typeof ScanRoute
   '/search': typeof SearchRoute
+  '/product/$id': typeof ProductIdRoute
+  '/product/new': typeof ProductNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +68,8 @@ export interface FileRoutesByTo {
   '/profile': typeof ProfileRoute
   '/scan': typeof ScanRoute
   '/search': typeof SearchRoute
+  '/product/$id': typeof ProductIdRoute
+  '/product/new': typeof ProductNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +78,37 @@ export interface FileRoutesById {
   '/profile': typeof ProfileRoute
   '/scan': typeof ScanRoute
   '/search': typeof SearchRoute
+  '/product/$id': typeof ProductIdRoute
+  '/product/new': typeof ProductNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/profile' | '/scan' | '/search'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/profile'
+    | '/scan'
+    | '/search'
+    | '/product/$id'
+    | '/product/new'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/profile' | '/scan' | '/search'
-  id: '__root__' | '/' | '/auth' | '/profile' | '/scan' | '/search'
+  to:
+    | '/'
+    | '/auth'
+    | '/profile'
+    | '/scan'
+    | '/search'
+    | '/product/$id'
+    | '/product/new'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/profile'
+    | '/scan'
+    | '/search'
+    | '/product/$id'
+    | '/product/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +117,8 @@ export interface RootRouteChildren {
   ProfileRoute: typeof ProfileRoute
   ScanRoute: typeof ScanRoute
   SearchRoute: typeof SearchRoute
+  ProductIdRoute: typeof ProductIdRoute
+  ProductNewRoute: typeof ProductNewRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +158,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/product/new': {
+      id: '/product/new'
+      path: '/product/new'
+      fullPath: '/product/new'
+      preLoaderRoute: typeof ProductNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/product/$id': {
+      id: '/product/$id'
+      path: '/product/$id'
+      fullPath: '/product/$id'
+      preLoaderRoute: typeof ProductIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,7 +181,18 @@ const rootRouteChildren: RootRouteChildren = {
   ProfileRoute: ProfileRoute,
   ScanRoute: ScanRoute,
   SearchRoute: SearchRoute,
+  ProductIdRoute: ProductIdRoute,
+  ProductNewRoute: ProductNewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
