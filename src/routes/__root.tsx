@@ -35,9 +35,13 @@ export const Route = createRootRoute({
       { title: "Ferro-Smart — Inventario IA" },
       { name: "description", content: "Sistema inteligente de inventario para ferreterías con escáner y búsqueda por IA." },
       { property: "og:title", content: "Ferro-Smart — Inventario IA" },
-      { property: "og:description", content: "Escanea, busca con IA y gestiona tu ferretería." },
+      { property: "og:description", content: "Sistema inteligente de inventario para ferreterías con escáner y búsqueda por IA." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Ferro-Smart — Inventario IA" },
+      { name: "twitter:description", content: "Sistema inteligente de inventario para ferreterías con escáner y búsqueda por IA." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1850222d-4b47-491c-8e18-60f885c48ca2/id-preview-dbc78048--878c4280-0cb7-42f2-829b-f2678509a2a6.lovable.app-1776957691998.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1850222d-4b47-491c-8e18-60f885c48ca2/id-preview-dbc78048--878c4280-0cb7-42f2-829b-f2678509a2a6.lovable.app-1776957691998.png" },
     ],
     links: [
       {
