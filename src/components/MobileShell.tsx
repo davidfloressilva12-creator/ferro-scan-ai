@@ -32,7 +32,7 @@ export function MobileShell({ children, title }: { children: ReactNode; title?: 
   return (
     <div className="min-h-screen bg-background flex flex-col max-w-md mx-auto relative">
       {title && (
-        <header className="sticky top-0 z-30 bg-gradient-primary text-primary-foreground px-5 pt-5 pb-6 shadow-md">
+        <header className="sticky top-0 z-30 bg-gradient-primary text-primary-foreground px-5 pt-5 pb-16 shadow-md">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-display font-bold">{title}</h1>
             <button
