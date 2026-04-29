@@ -12,10 +12,15 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as ScanRouteImport } from './routes/scan'
 import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as CreditsRouteImport } from './routes/credits'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as CartRouteImport } from './routes/cart'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CustomersIndexRouteImport } from './routes/customers.index'
 import { Route as ProductNewRouteImport } from './routes/product.new'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
+import { Route as CustomersNewRouteImport } from './routes/customers.new'
 
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
@@ -32,6 +37,21 @@ const ProfileRoute = ProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CreditsRoute = CreditsRouteImport.update({
+  id: '/credits',
+  path: '/credits',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -40,6 +60,11 @@ const AuthRoute = AuthRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomersIndexRoute = CustomersIndexRouteImport.update({
+  id: '/customers/',
+  path: '/customers/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductNewRoute = ProductNewRouteImport.update({
@@ -52,73 +77,113 @@ const ProductIdRoute = ProductIdRouteImport.update({
   path: '/product/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CustomersNewRoute = CustomersNewRouteImport.update({
+  id: '/customers/new',
+  path: '/customers/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/credits': typeof CreditsRoute
   '/profile': typeof ProfileRoute
   '/scan': typeof ScanRoute
   '/search': typeof SearchRoute
+  '/customers/new': typeof CustomersNewRoute
   '/product/$id': typeof ProductIdRoute
   '/product/new': typeof ProductNewRoute
+  '/customers/': typeof CustomersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/credits': typeof CreditsRoute
   '/profile': typeof ProfileRoute
   '/scan': typeof ScanRoute
   '/search': typeof SearchRoute
+  '/customers/new': typeof CustomersNewRoute
   '/product/$id': typeof ProductIdRoute
   '/product/new': typeof ProductNewRoute
+  '/customers': typeof CustomersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/credits': typeof CreditsRoute
   '/profile': typeof ProfileRoute
   '/scan': typeof ScanRoute
   '/search': typeof SearchRoute
+  '/customers/new': typeof CustomersNewRoute
   '/product/$id': typeof ProductIdRoute
   '/product/new': typeof ProductNewRoute
+  '/customers/': typeof CustomersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/auth'
+    | '/cart'
+    | '/checkout'
+    | '/credits'
     | '/profile'
     | '/scan'
     | '/search'
+    | '/customers/new'
     | '/product/$id'
     | '/product/new'
+    | '/customers/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
+    | '/cart'
+    | '/checkout'
+    | '/credits'
     | '/profile'
     | '/scan'
     | '/search'
+    | '/customers/new'
     | '/product/$id'
     | '/product/new'
+    | '/customers'
   id:
     | '__root__'
     | '/'
     | '/auth'
+    | '/cart'
+    | '/checkout'
+    | '/credits'
     | '/profile'
     | '/scan'
     | '/search'
+    | '/customers/new'
     | '/product/$id'
     | '/product/new'
+    | '/customers/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  CartRoute: typeof CartRoute
+  CheckoutRoute: typeof CheckoutRoute
+  CreditsRoute: typeof CreditsRoute
   ProfileRoute: typeof ProfileRoute
   ScanRoute: typeof ScanRoute
   SearchRoute: typeof SearchRoute
+  CustomersNewRoute: typeof CustomersNewRoute
   ProductIdRoute: typeof ProductIdRoute
   ProductNewRoute: typeof ProductNewRoute
+  CustomersIndexRoute: typeof CustomersIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -144,6 +209,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/credits': {
+      id: '/credits'
+      path: '/credits'
+      fullPath: '/credits'
+      preLoaderRoute: typeof CreditsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -156,6 +242,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/customers/': {
+      id: '/customers/'
+      path: '/customers'
+      fullPath: '/customers/'
+      preLoaderRoute: typeof CustomersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/product/new': {
@@ -172,27 +265,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/customers/new': {
+      id: '/customers/new'
+      path: '/customers/new'
+      fullPath: '/customers/new'
+      preLoaderRoute: typeof CustomersNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  CartRoute: CartRoute,
+  CheckoutRoute: CheckoutRoute,
+  CreditsRoute: CreditsRoute,
   ProfileRoute: ProfileRoute,
   ScanRoute: ScanRoute,
   SearchRoute: SearchRoute,
+  CustomersNewRoute: CustomersNewRoute,
   ProductIdRoute: ProductIdRoute,
   ProductNewRoute: ProductNewRoute,
+  CustomersIndexRoute: CustomersIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

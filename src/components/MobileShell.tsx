@@ -1,12 +1,14 @@
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
-import { Home, ScanLine, Sparkles, User, LogOut } from "lucide-react";
+import { Home, ScanLine, Sparkles, User, LogOut, ShoppingCart, Receipt } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
+import { useCart } from "@/hooks/use-cart";
 import { useEffect, ReactNode } from "react";
 
 const navItems = [
   { to: "/", icon: Home, label: "Inicio" },
   { to: "/scan", icon: ScanLine, label: "Escanear" },
-  { to: "/search", icon: Sparkles, label: "IA" },
+  { to: "/cart", icon: ShoppingCart, label: "Carrito" },
+  { to: "/credits", icon: Receipt, label: "Fiados" },
   { to: "/profile", icon: User, label: "Perfil" },
 ] as const;
 
@@ -14,6 +16,7 @@ export function MobileShell({ children, title }: { children: ReactNode; title?: 
   const location = useLocation();
   const navigate = useNavigate();
   const { user, loading, signOut } = useAuth();
+  const { count } = useCart();
 
   useEffect(() => {
     if (!loading && !user) {
@@ -48,10 +51,25 @@ export function MobileShell({ children, title }: { children: ReactNode; title?: 
 
       <main className="flex-1 pb-24 px-4 pt-4">{children}</main>
 
+      {/* Floating cart FAB cuando hay items y no estamos ya en el carrito */}
+      {count > 0 && location.pathname !== "/cart" && (
+        <Link
+          to="/cart"
+          className="fixed bottom-24 right-4 z-50 bg-primary-glow text-primary-foreground h-14 w-14 rounded-full shadow-glow flex items-center justify-center transition-smooth hover:scale-105"
+          aria-label="Ver carrito"
+        >
+          <ShoppingCart className="h-6 w-6" />
+          <span className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-[11px] font-bold h-6 min-w-6 px-1.5 rounded-full flex items-center justify-center border-2 border-background">
+            {count}
+          </span>
+        </Link>
+      )}
+
       <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-card border-t border-border shadow-lg z-40">
-        <div className="grid grid-cols-4">
+        <div className="grid grid-cols-5">
           {navItems.map(({ to, icon: Icon, label }) => {
             const active = location.pathname === to;
+            const isCart = to === "/cart";
             return (
               <Link
                 key={to}
@@ -61,11 +79,18 @@ export function MobileShell({ children, title }: { children: ReactNode; title?: 
                 {active && (
                   <span className="absolute top-0 left-1/2 -translate-x-1/2 h-1 w-10 rounded-b-full bg-primary-glow" />
                 )}
-                <Icon
-                  className={`h-5 w-5 transition-smooth ${
-                    active ? "text-primary scale-110" : "text-muted-foreground"
-                  }`}
-                />
+                <div className="relative">
+                  <Icon
+                    className={`h-5 w-5 transition-smooth ${
+                      active ? "text-primary scale-110" : "text-muted-foreground"
+                    }`}
+                  />
+                  {isCart && count > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground text-[9px] font-bold h-4 min-w-4 px-1 rounded-full flex items-center justify-center">
+                      {count}
+                    </span>
+                  )}
+                </div>
                 <span
                   className={`text-[10px] font-medium ${
                     active ? "text-primary" : "text-muted-foreground"
