@@ -16,7 +16,7 @@ type Suggestion = { id: string; name: string; price: number; brand?: string | nu
 
 function CartPage() {
   const navigate = useNavigate();
-  const { items, updateQty, removeItem, clear, subtotal, tax, total, count } = useCart();
+  const { items, updateQty, removeItem, clear, subtotal, tax, total, count, addItem } = useCart();
   const [editing, setEditing] = useState<string | null>(null);
   const [editValue, setEditValue] = useState("");
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
@@ -88,7 +88,6 @@ function CartPage() {
       .eq("id", s.id)
       .maybeSingle();
     if (!data) return;
-    const { addItem } = useCartFromHook();
     addItem({
       id: data.id, name: data.name, barcode: data.barcode, price: Number(data.price),
       brand: data.brand, category_id: data.category_id, image_url: data.image_url, stock: data.stock,
@@ -266,5 +265,3 @@ function Row({ label, value, bold }: { label: string; value: string; bold?: bool
   );
 }
 
-// helper para usar el hook fuera del componente principal de manera segura
-import { useCart as useCartFromHook } from "@/hooks/use-cart";
