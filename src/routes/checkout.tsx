@@ -97,7 +97,7 @@ function CheckoutPage() {
       line_total: +(it.product.price * it.quantity).toFixed(2),
     }));
 
-    const { data, error } = await supabase.rpc("create_sale", {
+    const { data, error } = await supabase.rpc("create_sale" as any, {
       p_doc_type: docType,
       p_customer_id: customer?.id ?? null,
       p_customer_name: customer?.name ?? null,
@@ -107,8 +107,8 @@ function CheckoutPage() {
       p_total: total,
       p_payment_method: method,
       p_status: status,
-      p_items: itemsPayload as any,
-    });
+      p_items: itemsPayload,
+    } as any);
 
     setSubmitting(false);
     if (error) {
