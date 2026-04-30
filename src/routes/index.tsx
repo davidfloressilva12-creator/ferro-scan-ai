@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { MobileShell } from "@/components/MobileShell";
 import { ProductCard } from "@/components/ProductCard";
 import { supabase } from "@/integrations/supabase/client";
-import { Search, Plus, AlertTriangle, Package2, ScanLine, Sparkles, Users, Receipt } from "lucide-react";
+import { Search, Plus, AlertTriangle, Package2, ScanLine, Sparkles, Users, Receipt, BarChart3 } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 
 export const Route = createFileRoute("/")({
