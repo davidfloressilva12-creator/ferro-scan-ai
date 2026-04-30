@@ -96,14 +96,18 @@ function Index() {
           <span className="text-xs font-semibold text-foreground">Agregar</span>
         </Link>
       </div>
-      <div className="grid grid-cols-2 gap-3 mb-6">
-        <Link to="/customers" className="flex items-center gap-2 bg-card border border-border rounded-2xl p-3 shadow-sm hover:shadow-md transition-smooth">
+      <div className="grid grid-cols-3 gap-3 mb-6">
+        <Link to="/customers" className="flex flex-col items-center gap-1 bg-card border border-border rounded-2xl p-3 shadow-sm hover:shadow-md transition-smooth">
           <Users className="h-5 w-5 text-primary-glow" />
-          <span className="text-xs font-semibold text-foreground">Clientes</span>
+          <span className="text-[11px] font-semibold text-foreground">Clientes</span>
         </Link>
-        <Link to="/credits" className="flex items-center gap-2 bg-card border border-border rounded-2xl p-3 shadow-sm hover:shadow-md transition-smooth">
+        <Link to="/credits" className="flex flex-col items-center gap-1 bg-card border border-border rounded-2xl p-3 shadow-sm hover:shadow-md transition-smooth">
           <Receipt className="h-5 w-5 text-destructive" />
-          <span className="text-xs font-semibold text-foreground">Por cobrar</span>
+          <span className="text-[11px] font-semibold text-foreground">Por cobrar</span>
+        </Link>
+        <Link to="/analytics" className="flex flex-col items-center gap-1 bg-card border border-border rounded-2xl p-3 shadow-sm hover:shadow-md transition-smooth">
+          <BarChart3 className="h-5 w-5 text-primary-glow" />
+          <span className="text-[11px] font-semibold text-foreground">Analíticas</span>
         </Link>
       </div>
 
