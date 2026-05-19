@@ -142,17 +142,12 @@ function ProductDetail() {
                 <div className="flex items-end justify-between mt-4">
                   <div>
                     <p className="text-3xl font-display font-bold text-foreground">
-                      ${product.price.toLocaleString("es-CO")}
+                      S/ {product.price.toLocaleString("es-PE", {minimumFractionDigits: 2,})}
                     </p>
                     <p className="text-xs text-muted-foreground">Precio unitario</p>
                   </div>
-                  <span
-                    className={`text-sm font-bold px-3 py-1.5 rounded-full ${
-                      lowStock ? "bg-destructive/10 text-destructive" : "bg-success/10"
-                    }`}
-                    style={{ color: lowStock ? undefined : "oklch(0.4 0.13 150)" }}
-                  >
-                    {product.stock} unidades
+                  <span className="text-sm py-1 px-2 font-semibold rounded-full bg-destructive/10 text-warning">
+                    Revisar stock
                   </span>
                 </div>
 

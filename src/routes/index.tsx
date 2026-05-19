@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { MobileShell } from "@/components/MobileShell";
 import { ProductCard } from "@/components/ProductCard";
 import { supabase } from "@/integrations/supabase/client";
-import { Search, Plus, AlertTriangle, Package2, ScanLine, Sparkles, Users, Receipt, BarChart3 } from "lucide-react";
+import { Search, Plus, Store, Package2, ScanLine, Sparkles, Users, Receipt, BarChart3 } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 
 export const Route = createFileRoute("/")({
@@ -35,14 +35,14 @@ function Index() {
   useEffect(() => {
     if (!user) return;
     const load = async () => {
-      const [{ data: latest }, { data: low }, { count }] = await Promise.all([
+      const [{ data: latest }, { count: low }, { count }] = await Promise.all([
         supabase.from("products").select("id,name,brand,price,image_url,stock").order("created_at", { ascending: false }).limit(8),
-        supabase.from("products").select("id,name,brand,price,image_url,stock").lte("stock", 10).order("stock").limit(20),
+        supabase.from("customers").select("id", { count: "exact", head: true }),
         supabase.from("products").select("id", { count: "exact", head: true }),
       ]);
       setProducts(latest ?? []);
       setLowStock(low ?? []);
-      setStats({ total: count ?? 0, lowStock: low?.length ?? 0 });
+      setStats({ total: count ?? 0, lowStock: low ?? 0 });
     };
     load();
   }, [user]);
@@ -64,9 +64,9 @@ function Index() {
           <p className="text-xs text-muted-foreground">Productos</p>
         </div>
         <div className="bg-card rounded-2xl p-4 shadow-elegant border border-border">
-          <AlertTriangle className="h-5 w-5 text-destructive mb-2" />
+          <Users className="h-5 w-5 text-success mb-2" />
           <p className="text-2xl font-display font-bold text-foreground">{stats.lowStock}</p>
-          <p className="text-xs text-muted-foreground">Stock crítico</p>
+          <p className="text-xs text-muted-foreground">Clientes</p>
         </div>
       </div>
 
@@ -115,8 +115,8 @@ function Index() {
         <section className="mb-6">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-base font-display font-bold text-foreground flex items-center gap-2">
-              <AlertTriangle className="h-4 w-4 text-destructive" />
-              Stock crítico
+              <Store className="h-4 w-4 text-ring" />
+              Productos
             </h2>
           </div>
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 snap-x">

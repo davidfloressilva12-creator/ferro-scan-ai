@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Package } from "lucide-react";
+import { Package, BookmarkCheck, Star } from "lucide-react";
 
 export interface ProductCardData {
   id: string;
@@ -45,17 +45,10 @@ export function ProductCard({ product }: { product: ProductCardData }) {
         </div>
         <div className="flex items-center justify-between mt-1">
           <span className="text-base font-bold font-display text-foreground">
-            ${product.price.toLocaleString("es-CO")}
+            S/ {product.price.toLocaleString("es-PE", { minimumFractionDigits: 2 })}
           </span>
-          <span
-            className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-              lowStock
-                ? "bg-destructive/10 text-destructive"
-                : "bg-success/10 text-success"
-            }`}
-            style={{ color: lowStock ? undefined : "oklch(0.4 0.13 150)" }}
-          >
-            {product.stock} und
+          <span className="text-sm py-1 px-2 font-semibold rounded-full bg-success/20 text-success">
+            Ver producto
           </span>
         </div>
       </div>

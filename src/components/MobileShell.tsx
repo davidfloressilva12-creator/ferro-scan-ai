@@ -49,7 +49,7 @@ export function MobileShell({ children, title }: { children: ReactNode; title?: 
         </header>
       )}
 
-      <main className="flex-1 pb-24 px-4 pt-4">{children}</main>
+      <main className="flex-1 pb-24 px-4 pt-16">{children}</main>
 
       {/* Floating cart FAB cuando hay items y no estamos ya en el carrito */}
       {count > 0 && location.pathname !== "/cart" && (
