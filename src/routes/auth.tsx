@@ -57,7 +57,7 @@ function AuthPage() {
           <span className="text-sm uppercase tracking-[0.25em] opacity-70">Ferretería Inteligente</span>
         </div>
         <h1 className="text-5xl font-display font-bold mb-3 leading-tight">
-          Ferro<span className="text-primary-glow">·</span>Smart
+          Ferreteria<span className="text-primary-glow"> · </span>HFM
         </h1>
         <p className="text-base opacity-80 mb-10">
           Escanea, busca con IA y controla tu inventario desde el bolsillo.

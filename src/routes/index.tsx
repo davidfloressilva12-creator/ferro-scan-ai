@@ -55,7 +55,7 @@ function Index() {
     : products;
 
   return (
-    <MobileShell title="Ferro·Smart">
+    <MobileShell title="Ferreteria · HFM">
       {/* Quick stats */}
       <div className="grid grid-cols-2 gap-3 -mt-12 mb-6">
         <div className="bg-card rounded-2xl p-4 shadow-elegant border border-border">
